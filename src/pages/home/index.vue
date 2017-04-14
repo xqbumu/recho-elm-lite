@@ -10,7 +10,7 @@
   import {panelTitle} from 'components'
 
   export default{
-    data(){
+    data () {
       return {
         msg: 'home page'
       }

@@ -32,7 +32,7 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {port_user} from 'common/port_uri'
+  import {portUser} from 'common/port_uri'
   import {mapGetters} from 'vuex'
 
   const USER_OUT = 0
@@ -44,15 +44,15 @@
       ...mapGetters(['get_user_info'])
     },
     methods: {
-      user_out(){
-        //退出
+      user_out  () {
+        //  退出
         this.$confirm('此操作将退出登录, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$http.post(port_user.logout)
-            .then(({data:{msg}}) => {
+          this.$http.post(portUser.logout)
+            .then(({data: {msg}}) => {
               this.isShow = false
               this.$message({
                 message: msg,
@@ -63,7 +63,7 @@
                 is_login: false
               })
               setTimeout(() => {
-                this.$router.replace({name: "login"})
+                this.$router.replace({name: 'login'})
               }, 500)
             })
             .catch(({status, statusText}) => {
@@ -76,23 +76,23 @@
 
         })
       },
-      user_info() {
-        //个人信息
+      user_info () {
+        // 个人信息
       },
-      user_setting() {
-        //设置
+      user_setting () {
+        // 设置
       },
-      user_click(type) {
+      user_click (type) {
         switch (type) {
           case USER_OUT :
-            //退出
+            // 退出
             this.user_out()
             break
           case USER_INFO:
-            //个人信息
+            // 个人信息
             break
           case USER_SETTING:
-            //设置
+            // 设置
             break
         }
       }

@@ -9,9 +9,9 @@
  *
  */
 
-//获取用户信息
-exports.info = "/api/get/user/info"
-//用户登录
-exports.login = "/api/post/user/login"
-//用户登出
-exports.logout = "/api/post/user/logout"
+// 获取用户信息
+exports.info = '/api/get/user/info'
+// 用户登录
+exports.login = '/api/post/user/login'
+// 用户登出
+exports.logout = '/api/post/user/logout'

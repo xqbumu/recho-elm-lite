@@ -10,6 +10,7 @@
  * @Copyright(©) 2017 by zzmhot.
  *
  */
+/* eslint-disable no-extend-native */
 import DateFormat from 'plugins/date'
 
 const install = function (Vue) {

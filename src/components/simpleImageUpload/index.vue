@@ -68,7 +68,7 @@
         type: Function
       }
     },
-    data(){
+    data () {
       return {
         upload_file: null
       }

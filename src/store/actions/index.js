@@ -10,8 +10,8 @@
  */
 
 export default {
-  set_user_info({commit}, {user, is_login}){
-    let _user = user === null ? new Object() : user
+  set_user_info ({commit}, {user, is_login}) {
+    let _user = user === null ? {} : user
     commit('SET_USER_INFO', _user)
     commit('SET_USER_LOGIN', is_login)
   }

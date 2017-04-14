@@ -14,7 +14,7 @@
 </template>
 <script type="text/javascript">
   export default{
-    data(){
+    data () {
       return {
         msg: 'hello vue'
       }

@@ -23,10 +23,10 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {port_user} from 'common/port_uri'
+  import {portUser} from 'common/port_uri'
 
   export default{
-    data(){
+    data () {
       return {
         form: {
           user_name: '',
@@ -36,27 +36,28 @@
           user_name: [{required: true, message: '请输入账户名！', trigger: 'blur'}],
           user_password: [{required: true, message: '请输入账户密码！', trigger: 'blur'}]
         },
-        //请求时的loading效果
+        // 请求时的loading效果
         load_data: false
       }
     },
-    mounted(){
+    mounted () {
       document.onkeydown = (event) => {
-        var e = event || window.event || arguments.callee.caller.arguments[0]
-        if (e && e.keyCode == 13) {
+        // var e = event || window.event || arguments.callee.caller.arguments[0]
+        var e = event || window.event || this.caller.arguments[0]
+        if (e && e.keyCode === 13) {
           this.submit_form()
         }
       }
     },
     methods: {
-      submit_form() {
+      submit_form () {
         let self = this
         self.$refs.form.validate((valid) => {
           if (valid) {
             this.load_data = true
-            //登录提交
-            self.$http.post(port_user.login, this.form)
-              .then(({data:{data, msg}}) => {
+            // 登录提交
+            self.$http.post(portUser.login, this.form)
+              .then(({data: {data, msg}}) => {
                 let isNull = data !== null
                 self.$store.dispatch('set_user_info', {
                   user: isNull ? data : null,
@@ -77,7 +78,7 @@
         })
       }
     },
-    destroyed(){
+    destroyed () {
       document.onkeydown = null
     }
   }

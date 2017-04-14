@@ -93,46 +93,46 @@
 </template>
 <script type="text/javascript">
   import {panelTitle, bottomToolBar} from 'components'
-  import {port_table} from 'common/port_uri'
+  import {portTable} from 'common/port_uri'
 
   export default{
-    data(){
+    data () {
       return {
         table_data: null,
-        //当前页码
+        // 当前页码
         currentPage: 1,
-        //数据总条目
+        // 数据总条目
         total: 0,
-        //每页显示多少条数据
+        // 每页显示多少条数据
         length: 15,
-        //请求时的loading效果
+        // 请求时的loading效果
         load_data: true,
-        //批量选择数组
-        batch_select: new Array()
+        // 批量选择数组
+        batch_select: []
       }
     },
     components: {
       panelTitle,
       bottomToolBar
     },
-    created(){
+    created () {
       this.get_table_data()
     },
     methods: {
-      //刷新
-      on_refresh(){
+      // 刷新
+      on_refresh () {
         this.get_table_data()
       },
-      //获取数据
-      get_table_data(){
+      // 获取数据
+      get_table_data () {
         this.load_data = true
-        this.$http.get(port_table.list, {
+        this.$http.get(portTable.list, {
           params: {
             page: this.currentPage,
             length: this.length
           }
         })
-          .then(({data:{data, page, total}}) => {
+          .then(({data: {data, page, total}}) => {
             this.table_data = data
             this.currentPage = parseInt(page)
             this.total = parseInt(total)
@@ -145,15 +145,15 @@
             })
           })
       },
-      //根据id删除数据
-      delete_data(id){
+      // 根据id删除数据
+      delete_data (id) {
         this.$confirm('此操作将删除该数据, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$http.post(port_table.del, {id: id})
-            .then(({data:{data, code, msg}}) => {
+          this.$http.post(portTable.del, {id: id})
+            .then(({data: {data, code, msg}}) => {
               this.get_table_data()
               this.$message({
                 message: msg,
@@ -170,26 +170,26 @@
 
         })
       },
-      //页码选择
-      handleCurrentChange(val) {
+      // 页码选择
+      handleCurrentChange (val) {
         this.currentPage = val
         this.get_table_data()
       },
-      //批量选择
-      on_batch_select(val){
+      // 批量选择
+      on_batch_select (val) {
         this.batch_select = val
       },
-      //批量删除
-      on_batch_del(){
+      // 批量删除
+      on_batch_del () {
         this.$confirm('此操作将批量删除选择数据, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$http.post(port_table.batch_del, {
+          this.$http.post(portTable.batch_del, {
             params: this.batch_select
           })
-            .then(({data:{msg}}) => {
+            .then(({data: {msg}}) => {
               this.get_table_data()
               this.$message({
                 message: msg,

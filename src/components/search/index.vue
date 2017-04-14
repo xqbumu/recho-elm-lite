@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit_form">
+  <form @submit.prevent='submit_form'>
     <el-input
       :placeholder="placeholder"
       v-model="formValue">
@@ -11,10 +11,10 @@
     props: {
       placeholder: {
         type: String,
-        default: "Search here..."
+        default: 'Search here...'
       }
     },
-    data(){
+    data () {
       return {
         formValue: ''
       }
@@ -25,7 +25,7 @@
       }
     },
     methods: {
-      submit_form() {
+      submit_form () {
         if (!this.valueIsNull) {
           this.$emit('search', this.formValue)
         }

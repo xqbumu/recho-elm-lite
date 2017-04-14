@@ -28,17 +28,17 @@
   import {panelTitle} from 'components'
 
   export default{
-    data(){
+    data () {
       return {
         echarts_instance: null
       }
     },
-    created(){
+    created () {
       this.get_echarts_instance()
     },
     methods: {
-      get_echarts_instance(){
-        //按需引入 ECharts 图表和组件，这里先全部引入
+      get_echarts_instance () {
+        // 按需引入 ECharts 图表和组件，这里先全部引入
         require(['echarts'], (echarts) => {
           this.echarts_instance = echarts
           this.create_chartsA()
@@ -46,7 +46,7 @@
           this.create_chartsC()
         })
       },
-      create_chartsA(){
+      create_chartsA () {
         let _dom = this.$refs.chartsA
         let myChart = this.echarts_instance.init(_dom)
 
@@ -116,18 +116,17 @@
             }
           ]
         })
-
       },
-      create_chartsB(){
+      create_chartsB () {
         let _dom = this.$refs.chartsB
         let myChart = this.echarts_instance.init(_dom)
-        var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
-        var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-        var yMax = 500;
-        var dataShadow = [];
+        var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放']
+        var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220]
+        var yMax = 500
+        var dataShadow = []
 
         for (var i = 0; i < data.length; i++) {
-          dataShadow.push(yMax);
+          dataShadow.push(yMax)
         }
 
         let option = {
@@ -210,21 +209,20 @@
               data: data
             }
           ]
-        };
+        }
         myChart.setOption(option)
         // Enable data zoom when user click bar.
-        var zoomSize = 6;
+        var zoomSize = 6
         myChart.on('click', function (params) {
-          console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+          console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)])
           myChart.dispatchAction({
             type: 'dataZoom',
             startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
             endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
-          });
-        });
-
+          })
+        })
       },
-      create_chartsC(){
+      create_chartsC () {
         let _dom = this.$refs.chartsC
         let myChart = this.echarts_instance.init(_dom)
         myChart.setOption({
@@ -326,7 +324,7 @@
     components: {
       panelTitle
     },
-    destroyed(){
+    destroyed () {
       this.echarts_instance = null
     }
   }

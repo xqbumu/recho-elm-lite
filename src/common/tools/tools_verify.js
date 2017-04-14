@@ -9,11 +9,11 @@
  *
  */
 
-//验证url是否正确，true/false
-export function url(url) {
+// 验证url是否正确，true/false
+export function url (url) {
   return (/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/i).test(url)
 }
-//验证手机号码是否正确， true/false
-export function tel(tel) {
+// 验证手机号码是否正确， true/false
+export function tel (tel) {
   return (/^1[3|4|5|8][0-9]\d{4,8}$/).test(tel)
 }

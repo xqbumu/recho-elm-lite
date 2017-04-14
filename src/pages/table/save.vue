@@ -50,6 +50,11 @@
                 :minlength="6">
               </el-input>
             </el-form-item>
+            <el-form-item label="图片:">
+              <simpleImageUpload
+                :action="portFile.image_upload">
+              </simpleImageUpload>
+            </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="on_submit_form" :loading="on_submit_loading">立即提交</el-button>
               <el-button @click="$router.back()">取消</el-button>
@@ -61,18 +66,17 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {panelTitle} from 'components'
-  import {port_table, port_file, port_code} from 'common/port_uri'
-  import {tools_verify} from 'common/tools'
+  import {panelTitle, simpleImageUpload} from 'components'
+  import {portTable, portFile} from 'common/port_uri'
 
   export default{
-    data(){
+    data () {
       return {
         form: {
           name: null,
           sex: 1,
           age: 20,
-          birthday: (new Date()).$DateFormat("yyyy-MM-dd"),
+          birthday: (new Date()).$DateFormat('yyyy-MM-dd'),
           address: null,
           zip: 412300
         },
@@ -81,38 +85,39 @@
         on_submit_loading: false,
         rules: {
           name: [{required: true, message: '姓名不能为空', trigger: 'blur'}]
-        }
+        },
+        portFile: portFile
       }
     },
-    created(){
+    created () {
       if (this.route_id) {
         this.get_form_data()
       }
     },
     methods: {
-      //获取数据
-      get_form_data(){
+      // 获取数据
+      get_form_data () {
         this.load_data = true
-        this.$http.get(port_table.get, {
+        this.$http.get(portTable.get, {
           params: {
             id: this.route_id
           }
-        }).then(({data:{data}}) => {
+        }).then(({data: {data}}) => {
           this.form = data
           this.load_data = false
         })
       },
-      //时间选择改变时
-      on_change_birthday(val){
+      // 时间选择改变时
+      on_change_birthday (val) {
         this.$set(this.form, 'birthday', val)
       },
-      //提交
-      on_submit_form(){
+      // 提交
+      on_submit_form () {
         this.$refs.form.validate((valid) => {
           if (!valid) return false
           this.on_submit_loading = true
-          this.$http.post(port_table.save, this.form)
-            .then(({data:{msg}}) => {
+          this.$http.post(portTable.save, this.form)
+            .then(({data: {msg}}) => {
               this.$message({
                 message: msg,
                 type: 'success'
@@ -120,18 +125,20 @@
               setTimeout(() => {
                 this.$router.back()
               }, 500)
-            }).catch(({status, statusText}) => {
-            this.$message({
-              message: '操作失败！错误原因 ' + statusText + ' 状态码 ' + status,
-              type: 'error'
             })
-            this.on_submit_loading = false
-          })
+            .catch(({status, statusText}) => {
+              this.$message({
+                message: '操作失败！错误原因 ' + statusText + ' 状态码 ' + status,
+                type: 'error'
+              })
+              this.on_submit_loading = false
+            })
         })
       }
     },
     components: {
-      panelTitle
+      panelTitle,
+      simpleImageUpload
     }
   }
 </script>

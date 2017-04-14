@@ -9,8 +9,8 @@
  *
  */
 
-import * as tools_verify from './tools_verify'
+import * as toolsVerify from './tools_verify'
 
 export {
-  tools_verify
+  toolsVerify
 }

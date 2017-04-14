@@ -16,7 +16,7 @@
       search
     },
     methods: {
-      submit_search(value) {
+      submit_search (value) {
         this.$message({
           message: value,
           type: 'success'

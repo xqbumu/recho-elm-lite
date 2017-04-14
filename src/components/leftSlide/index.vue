@@ -42,30 +42,30 @@
 </template>
 <script type="text/javascript">
   export default{
-    data(){
+    data () {
       return {
         nav_menu_data: [{
-          title: "主页",
-          path: "/home",
-          icon: "fa-home"
+          title: '主页',
+          path: '/home',
+          icon: 'fa-home'
         }, {
-          title: "表格管理",
-          path: "/table",
-          icon: "fa-table",
+          title: '表格管理',
+          path: '/table',
+          icon: 'fa-table',
           child: [{
-            title: "基本表格",
-            path: "/table/base"
+            title: '基本表格',
+            path: '/table/base'
           }, {
-            title: "排序表格",
-            path: "/table/sort"
+            title: '排序表格',
+            path: '/table/sort'
           }]
         }, {
-          title: "图表管理",
-          path: "/charts",
-          icon: "fa-bar-chart-o",
+          title: '图表管理',
+          path: '/charts',
+          icon: 'fa-bar-chart-o',
           child: [{
-            title: "柱状图表",
-            path: "/charts/bar"
+            title: '柱状图表',
+            path: '/charts/bar'
           }]
         }]
       }

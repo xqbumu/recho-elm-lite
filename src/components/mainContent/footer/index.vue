@@ -4,7 +4,7 @@
 <script type="text/javascript">
   export default {
     computed: {
-      getYear(){
+      getYear () {
         return new Date().getFullYear()
       }
     }

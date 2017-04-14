@@ -11,9 +11,9 @@
  *
  */
 
-//成功
+// 成功
 exports.success = 0
-//错误
+// 错误
 exports.error = 1
-//未登录
+// 未登录
 exports.unlogin = 2

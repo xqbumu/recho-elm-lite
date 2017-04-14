@@ -3,7 +3,7 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
       'src': resolve('src'),
       'assets': resolve('src/assets'),
       'common': resolve('src/common'),
@@ -34,30 +35,38 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.vue$/i,
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
+        test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
       {
-        test: /\.js$/i,
+        test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')],
-        exclude: resolve('node_modules')
+        include: [resolve('src'), resolve('test')]
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/i,
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
-          limit: 1000,
-          name: utils.assetsPath('images/[hash:8].[ext]')
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
-          limit: 1000,
-          name: utils.assetsPath('fonts/[hash:8].[ext]')
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
     ]
